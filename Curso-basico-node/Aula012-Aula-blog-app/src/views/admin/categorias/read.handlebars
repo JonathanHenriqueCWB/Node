@@ -1,7 +1,7 @@
 <h1>Lista de categorais</h1>
 <hr>
 
-<a href="/admin/categorias-cadastrar">
+<a href="/admin/create-category">
     <button class='btn btn-outline-dark'>NOVA CATEGORIA</button>
 </a>
 
@@ -22,8 +22,8 @@
             <td>{{nome}}</td>
             <td>{{slug}}</td>
             <td>
-                <a href="/admin/categorias-atualizar/{{_id}}"><button class="btn btn-outline-light btn-sm" type="submit">Editar</button></a>
-                <button class="btn btn-outline-light btn-sm" type="submit">Excluir</button>
+                <a href="/admin/category-update/{{_id}}"><button class="btn btn-outline-light btn-sm" type="submit">Editar</button></a>
+                <a href='/admin/category-delete/{{_id}}'><button class="btn btn-outline-light btn-sm" type="submit">Excluir</button></a>
             </td>
         </tr>
         {{else}}

@@ -1,7 +1,7 @@
 <h1>Atualizar categoria</h1>
 <hr>
 
-<form action='/admin/categorias-atualizar' method="post">
+<form action='/admin/category-update' method="post">
     
     <input type="hidden" name="id" value={{categoria._id}}>
 
@@ -15,6 +15,7 @@
         <input type="text" class="form-control" id="slug" name="slug" placeholder="Novo slug para categoria" value={{categoria.slug}}>
     </div>
 
-    <button type="submit" class="btn btn-dark">ATUALIZAR CATEGORIA</button><br>
+    <p style='color: rgb(150, 150, 60)'>Tem certeza que gostaria de editar essa categoria?</p>
+    <button type="submit" class="btn btn-warning">ATUALIZAR CATEGORIA</button><br>
 
 </form>
