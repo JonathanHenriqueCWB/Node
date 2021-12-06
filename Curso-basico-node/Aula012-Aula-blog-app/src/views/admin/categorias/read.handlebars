@@ -1,0 +1,33 @@
+<h1>Lista de categorais</h1>
+<hr>
+
+<a href="/admin/categorias-cadastrar">
+    <button class='btn btn-outline-dark'>NOVA CATEGORIA</button>
+</a>
+
+<table class="table table-dark table-hover mt-3">
+    <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">NOME</th>
+          <th scope="col">SLUG</th>
+          <th scope="col">####</th>
+        </tr>
+    </thead>      
+    <tbody>
+
+        {{#each categorias}}
+        <tr>
+            <th scope="row">#</th>
+            <td>{{nome}}</td>
+            <td>{{slug}}</td>
+            <td>
+                <a href="/admin/categorias-atualizar/{{_id}}"><button class="btn btn-outline-light btn-sm" type="submit">Editar</button></a>
+                <button class="btn btn-outline-light btn-sm" type="submit">Excluir</button>
+            </td>
+        </tr>
+        {{else}}
+        {{/each}}
+        
+    </tbody>
+</table>

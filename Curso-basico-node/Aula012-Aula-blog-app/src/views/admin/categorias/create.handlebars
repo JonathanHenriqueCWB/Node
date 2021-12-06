@@ -1,0 +1,27 @@
+<h1>Criar nova categoria</h1>
+<hr>
+
+<h2>Formulario de cadastro</h2>
+<form method="post">
+
+  <div class="mb-3">
+    <label for="nome" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="nome" name="nome" placeholder="Entre com o nome">
+  </div>
+
+  <div class="mb-3">
+    <label for="slug" class="form-label">Slug</label>
+    <input type="text" class="form-control" id="slug" name="slug" placeholder="Entre com o slug">
+  </div>
+
+  <button type="submit" class="btn btn-dark">CADASTRAR NOVA CATEGORIA</button><br>
+  
+</form>
+
+<!-- validações da rota -->
+{{#each erros}}
+  <div class="alert alert-danger mt-3">{{texto}}</div>
+{{else}}
+
+{{/each}}
+

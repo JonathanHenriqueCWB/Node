@@ -1,0 +1,20 @@
+<h1>Atualizar categoria</h1>
+<hr>
+
+<form action='/admin/categorias-atualizar' method="post">
+    
+    <input type="hidden" name="id" value={{categoria._id}}>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Nome</label>
+        <input type="text" class="form-control" id="nome" name="nome" placeholder="Novo nome para categoria" value={{categoria.nome}}>
+    </div>
+
+    <div class="mb-3">
+        <label for="slug" class="form-label">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" placeholder="Novo slug para categoria" value={{categoria.slug}}>
+    </div>
+
+    <button type="submit" class="btn btn-dark">ATUALIZAR CATEGORIA</button><br>
+
+</form>
