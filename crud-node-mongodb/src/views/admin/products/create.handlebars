@@ -1,0 +1,35 @@
+<h1>Create product</h1>
+<hr>
+
+<form action="/admin/products/create" method="post">
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" id="name">
+
+    <br><br>
+
+    <label for="category">Category</label><br>
+    <input type="text" name="category" id="category">
+
+    <br><br>
+
+    <label for="quantity">Quantity</label><br>
+    <input type="number" name="quantity" id="quantity">
+
+    <br><br>
+
+    <label for="brand">Brand</label><br>
+    <input type="text" name="brand" id="brand">
+
+    <br><br>
+
+    <label for="description">Description</label><br>
+    <textarea name="description" id="description" cols="20" rows="5"></textarea>
+
+    <br><br>
+    <button>CREATE NEW PRODUCT</button>
+</form>
+
+{{#each error}}
+    <p>{{text}}</p>
+{{else}}
+{{/each}}

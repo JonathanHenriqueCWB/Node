@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crud-Mongo</title>
+</head>
+<body>
+
+    <!-- Validações flash -->
+    {{#if success_msg}}
+        <div class='alert alert-success mt-4'>{{success_msg}}</div>
+    {{/if}}
+
+    {{#if error_msg}}
+        <div class='alert alert-danger mt-4'>{{error_msg}}</div>
+    {{/if}}
+
+    <!-- Corpo da requisição-->
+    {{{ body }}}
+
+</body>
+</html>
