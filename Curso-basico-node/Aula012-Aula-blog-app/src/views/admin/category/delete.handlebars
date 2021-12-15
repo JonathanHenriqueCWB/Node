@@ -1,0 +1,21 @@
+<h1>Delete Category</h1>
+<hr>
+
+<form action='/admin/category/delete' method="post">
+    
+    <input type="hidden" name="id" value={{category._id}}>
+
+    <div class="mb-3">
+        <label for="nome" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nome" name="nome" value={{category.name}}>
+    </div>
+
+    <div class="mb-3">
+        <label for="slug" class="form-label">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" value={{category.slug}}>
+    </div>
+
+    <h4 style='color: red'>Are you sure you'd like to delete {{category.name}}?</h4>
+    <button type="submit" class="btn btn-danger">DELETE CATEGORY</button><br>
+
+</form>

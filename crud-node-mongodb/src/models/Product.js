@@ -7,9 +7,9 @@ const productSchema = new Schema({
     quantity: { type: Number, require: true },
     brand: { type: String, require: true },
     description: { type: String, require: true },
+    //category: { type: },
     date: { type: Date, default: Date.now }
 })
 
 const Product = Mongoose.model('Product', productSchema)
-
 export default Product
