@@ -1,0 +1,35 @@
+<h1>Create new Posts</h1>
+<hr>
+
+<h2>Registration form</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+    </div>
+    <div class="mb-3">
+        <label for="slug" class="form-label">Slug</label>
+        <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" id="description" name="description" placeholder="description">
+    </div>
+    <div class="mb-3">
+        <label for="content" class="form-label">Content</label>
+        <input type="text" class="form-control" id="content" name="content" placeholder="content">
+    </div>
+
+    <label for="">Category</label>
+    <select class="form-select mt-2" aria-label="Default select example">
+        <option selected>Select Category</option>
+        {{#each categories}}
+            <option value="{{_id}}">{{name}}</option>
+        {{else}}
+            <option value="0">No registered item</option>
+        {{/each}}
+    </select>
+
+    <button type="submit" class="btn btn-dark mt-4">CREATE POSTS</button><br>
+</form>

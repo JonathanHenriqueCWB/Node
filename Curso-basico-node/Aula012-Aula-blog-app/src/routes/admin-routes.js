@@ -1,12 +1,14 @@
-import Category from '../models/Categoria.js' 
 import { Router } from "express";
 const router = Router()
+
+import Category from '../models/Categoria.js' 
+import Posts from '../models/Posts.js'
 
 router.get('/', (req, res) => res.render('admin/index'))
 
 router.get('/category', (req, res) => {
-    Category.find().lean().sort({date: 'desc'}).then(categorias => {
-        res.render('admin/category/read', { categorias })
+    Category.find().lean().sort({date: 'desc'}).then(categories => {
+        res.render('admin/category/read', { categories })
     }).catch(err => {
         req.flash('error_msg', 'Erro ao carregar categorias')
         req.redirect('/admin')
@@ -117,6 +119,25 @@ router.post('/category/delete', (req, res) => {
     }).catch(err => {
         req.flash('error_msg', 'Error erasing category')
         res.redirect('/admin/category')
+    })
+})
+
+router.get('/posts', (req, res) => {
+    Posts.find().lean().sort({date: 'desc'}).then(posts => {
+        res.render('admin/posts/read', { posts })
+    }).catch(err => {
+        req.flash('error_msg', 'Error loading posts')
+        res.redirect('/admin')
+    })
+})
+
+router.get('/posts/create', (req, res) => {
+    Category.find().lean().then(categories => {
+        res.render('admin/posts/create', { categories })
+        console.log(categories)
+    }).catch(err => {
+        req.flash('error_msg', 'Error loading categories')
+        res.redirect('/admin')
     })
 })
 
