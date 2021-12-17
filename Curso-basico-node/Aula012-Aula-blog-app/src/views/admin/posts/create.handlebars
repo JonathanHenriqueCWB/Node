@@ -1,35 +1,44 @@
 <h1>Create new Posts</h1>
 <hr>
 
+{{#each error}}
+    <div class="alert alert-danger">{{text}}</div>
+{{else}}
+{{/each}}
+
 <h2>Registration form</h2>
 
-<form method="post">
-    <div class="mb-3">
-        <label for="title" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+<div class="card">
+    <div class="card-body">
+        <form method="post" action="/admin/posts/create">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+            </div>
+            <div class="mb-3">
+                <label for="slug" class="form-label">Slug</label>
+                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
+            </div>
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description" placeholder="description">
+            </div>
+            <div class="mb-3">
+                <label for="content" class="form-label">Content</label>
+                <textarea name="content" id="content" cols="30" rows="10" class="form-control"></textarea>
+            </div>
+            <div>
+                <label for="">Category</label>
+                <select class="form-select mt-2" aria-label="Default select example" name="category" id="category">
+                    <option value="0" selected>Select Category</option>
+                    {{#each categories}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{else}}
+                        <option value="0">No registered item</option>
+                    {{/each}}                
+                </select>
+            </div>
+            <button type="submit" class="btn btn-dark mt-4">CREATE POSTS</button><br>
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="slug" class="form-label">Slug</label>
-        <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug">
-    </div>
-    <div class="mb-3">
-        <label for="description" class="form-label">Description</label>
-        <input type="text" class="form-control" id="description" name="description" placeholder="description">
-    </div>
-    <div class="mb-3">
-        <label for="content" class="form-label">Content</label>
-        <input type="text" class="form-control" id="content" name="content" placeholder="content">
-    </div>
-
-    <label for="">Category</label>
-    <select class="form-select mt-2" aria-label="Default select example">
-        <option selected>Select Category</option>
-        {{#each categories}}
-            <option value="{{_id}}">{{name}}</option>
-        {{else}}
-            <option value="0">No registered item</option>
-        {{/each}}
-    </select>
-
-    <button type="submit" class="btn btn-dark mt-4">CREATE POSTS</button><br>
-</form>
+</div>

@@ -10,5 +10,5 @@ const PostsSchema = new Schema({
     date: { type: Date, default: Date.now() }
 })
 
-const Posts = mongoose.model('Posts', PostsSchema)
-export default Posts
+const Post = mongoose.model('Post', PostsSchema)
+export default Post

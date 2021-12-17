@@ -1,8 +1,8 @@
 import { Router } from "express";
 const router = Router()
 
-import Category from '../models/Categoria.js' 
-import Posts from '../models/Posts.js'
+import Category from '../models/Category.js' 
+import Post from '../models/Post.js'
 
 router.get('/', (req, res) => res.render('admin/index'))
 
@@ -123,7 +123,7 @@ router.post('/category/delete', (req, res) => {
 })
 
 router.get('/posts', (req, res) => {
-    Posts.find().lean().sort({date: 'desc'}).then(posts => {
+    Post.find().lean().sort({date: 'desc'}).then(posts => {
         res.render('admin/posts/read', { posts })
     }).catch(err => {
         req.flash('error_msg', 'Error loading posts')
@@ -134,11 +134,38 @@ router.get('/posts', (req, res) => {
 router.get('/posts/create', (req, res) => {
     Category.find().lean().then(categories => {
         res.render('admin/posts/create', { categories })
-        console.log(categories)
     }).catch(err => {
         req.flash('error_msg', 'Error loading categories')
         res.redirect('/admin')
     })
+})
+
+router.post('/posts/create', (req, res) => {
+    
+    const error = []
+    const newPost = {
+        title: req.body.title,
+        slug: req.body.slug,
+        description: req.body.description,
+        content: req.body.content,
+        category: req.body.category
+    }
+
+    if(newPost.category == '0'){
+        error.push({text: 'Categoria invalida, registre uma categoria'})
+    }
+
+    if(error.length > 0){
+        res.render('admin/posts/create', {error})
+    }else{
+        new Post(newPost).save().then(() => {
+            req.flash('success_msg', 'Post criado com sucesso')
+            res.redirect('/admin/posts')
+        }).catch(err => {
+            req.flash('error_msg', 'Erro ao criar posts')
+            res.redirect('/admin/posts')
+        })
+    }
 })
 
 export default router
