@@ -1,25 +1,24 @@
 import { Router } from "express";
 const router = Router()
-
 import Category from '../models/Category.js' 
 import Post from '../models/Post.js'
 
 router.get('/', (req, res) => res.render('admin/index'))
 
-router.get('/category', (req, res) => {
+router.get('/categories', (req, res) => {
     Category.find().lean().sort({date: 'desc'}).then(categories => {
-        res.render('admin/category/read', { categories })
+        res.render('admin/categories/read', { categories })
     }).catch(err => {
-        req.flash('error_msg', 'Erro ao carregar categorias')
+        req.flash('error_msg', 'Error loading categories')
         req.redirect('/admin')
     })
 })
 
-router.get('/category/create', (req, res) => {
-    res.render('admin/category/create')
+router.get('/categories/create', (req, res) => {
+    res.render('admin/categories/create')
 })
 
-router.post('/category/create', (req, res) => {
+router.post('/categories/create', (req, res) => {
 
     var erros = []
 
@@ -37,7 +36,7 @@ router.post('/category/create', (req, res) => {
     }
 
     if(erros.length > 0){
-        res.render('admin/category/create', { erros })
+        res.render('admin/categories/create', { erros })
     }else{
         const newCategory = {
             name: req.body.name,
@@ -46,7 +45,7 @@ router.post('/category/create', (req, res) => {
 
         new Category(newCategory).save().then(() => {
             req.flash('success_msg', 'Category successfully created')
-            res.redirect('/admin/category')
+            res.redirect('/admin/categories')
 
         }).catch(err => {
             req.flash('error_msg', 'Error creating category')
@@ -56,16 +55,16 @@ router.post('/category/create', (req, res) => {
 })
 
 
-router.get('/category/update/:id', (req, res) => {
+router.get('/categories/update/:id', (req, res) => {
     Category.findOne({_id: req.params.id}).lean().then(category => {
-        res.render('admin/category/update', { category })
+        res.render('admin/categories/update', { category })
     }).catch(err => {
         req.flash('error_msg', 'Categoria inexistente')
         res.redirect('/admin')
     })
 })
     
-router.post('/category/update', (req, res) => {
+router.post('/categories/update', (req, res) => {
 
     const erros = []    
     if(!req.body.name || typeof req.body.name == undefined || req.body.name == null) {
@@ -83,7 +82,7 @@ router.post('/category/update', (req, res) => {
     }
 
     if(erros > 0) {
-        res.render('admin/category/update', { erros })
+        res.render('admin/categories/update', { erros })
     }else {
         Category.findById({_id: req.body.id}).then(category => {
             category.name = req.body.name
@@ -91,43 +90,40 @@ router.post('/category/update', (req, res) => {
 
             category.save().then(() => {
                 req.flash('success_msg', 'Successfully edited category')
-                res.redirect('/admin/category')
+                res.redirect('/admin/categories')
             }).catch(err => {
                 req.flash('error_msg', 'Error editing category' + err)
-                res.redirect('/admin/category')
+                res.redirect('/admin/catgories')
             })    
         }).catch(err => {
             req.flash('error_msg', 'Non-existent category' + err)
-            res.redirect('/admin/category')
+            res.redirect('/admin/categories')
         })
     }
 })
 
-router .get('/category/delete/:id', (req, res) => {
+router .get('/categories/delete/:id', (req, res) => {
     Category.findOne({_id: req.params.id}).lean().then(category => {
-        res.render('admin/category/delete', { category })
+        res.render('admin/categories/delete', { category })
     }).catch(err => {
         req.flash('error_msg', 'Categoria não encontrada')
-        res.redirect('/admin/category')
+        res.redirect('/admin/categories')
     })
 })
 
-router.post('/category/delete', (req, res) => {
+router.post('/categories/delete', (req, res) => {
     Category.deleteOne({_id: req.body.id}).then(category => {
         req.flash('success_msg', 'Category successfully deleted')
-        res.redirect('/admin/category')
+        res.redirect('/admin/categories')
     }).catch(err => {
         req.flash('error_msg', 'Error erasing category')
-        res.redirect('/admin/category')
+        res.redirect('/admin/categories')
     })
 })
 
 router.get('/posts', (req, res) => {
-    Post.find().lean().sort({date: 'desc'}).then(posts => {
-        res.render('admin/posts/read', { posts })
-    }).catch(err => {
-        req.flash('error_msg', 'Error loading posts')
-        res.redirect('/admin')
+    Post.find().populate('category').lean().sort({date: 'desc'}).then(posts => {
+        res.render('admin/posts/read', {posts})
     })
 })
 
@@ -167,5 +163,39 @@ router.post('/posts/create', (req, res) => {
         })
     }
 })
+
+router.get('/posts/update/:id', (req, res) => {
+    Post.findById({_id: req.params.id}).lean().then(post => {
+        Category.find().lean().then(categories => {
+            res.render('admin/posts/update', {post, categories} )
+        }).catch(err => {
+            req.flash('error_msg', 'Erro ao carregar categorias')
+            res.redirect('/admin/posts')
+        })
+    }).catch(err => {
+        req.flash('error_msg', 'Erro ao carregar postagem')
+        res.redirect('/admin/posts')
+    })
+})
+
+router.post('/posts/update', (req, res) => {
+    Post.findById({_id: req.body.id}).then(post => {
+        
+        post.title = req.body.title
+        post.slug = req.body.slug
+        post.description = req.body.description
+        post.content = req.body.content
+        post.category = req.body.category
+
+        post.save().then(() => {
+            req.flash('success_msg', 'Successfully edited post')
+            res.redirect('/admin/categories')
+        }).catch(err => {
+            req.flash('error_msg', 'Error editing post' + err)
+            res.redirect('/admin/catgories')
+        })  
+    })
+})
+
 
 export default router

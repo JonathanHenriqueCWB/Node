@@ -1,7 +1,7 @@
 <h1>List of Category</h1>
 <hr>
 
-<a href="/admin/category/create">
+<a href="/admin/categories/create">
     <button class='btn btn-outline-dark'>NEW CATEGORY</button>
 </a>
 
@@ -21,8 +21,8 @@
                 <td>{{name}}</td>
                 <td>{{slug}}</td>
                 <td>
-                    <a href="/admin/category/update/{{_id}}"><button class="btn btn-outline-light btn-sm" type="submit">Editar</button></a>
-                    <a href='/admin/category/delete/{{_id}}'><button class="btn btn-outline-light btn-sm" type="submit">Excluir</button></a>
+                    <a href="/admin/categories/update/{{_id}}"><button class="btn btn-outline-light btn-sm" type="submit">Editar</button></a>
+                    <a href='/admin/categories/delete/{{_id}}'><button class="btn btn-outline-light btn-sm" type="submit">Excluir</button></a>
                 </td>
             </tr>
         {{else}}
