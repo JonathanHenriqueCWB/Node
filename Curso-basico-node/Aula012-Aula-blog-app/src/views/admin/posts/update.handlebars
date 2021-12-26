@@ -10,24 +10,24 @@
         <form method="post" action="/admin/posts/create">
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" value={{post.title}}>
+                <input type="text" class="form-control" id="title" name="title" value='{{post.title}}'>
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="slug" name="slug" value={{post.slug}}>
+                <input type="text" class="form-control" id="slug" name="slug" value='{{post.slug}}'>
             </div>
             <div class="mb-3">
                 <label for="description" class="form-label">Description</label>
-                <input type="text" class="form-control" id="description" name="description" value={{post.description}}>
+                <input type="text" class="form-control" id="description" name="description" value='{{post.description}}'>
             </div>
             <div class="mb-3">
                 <label for="content" class="form-label">Content</label>
-                <textarea name="content" id="content" cols="30" rows="10" class="form-control" placeholder={{post.content}}></textarea>
+                <textarea name="content" id="content" cols="30" rows="10" class="form-control">{{post.content}}</textarea>
             </div>
 
             <div>
                 <label for="">Category</label>
-                <select class="form-select mt-2" aria-label="Default select example" name="category" id="category">
+                <select class="form-control mt-2" aria-label="Default select example" name="category" id="category">
                     <option value="0" selected>Select Category</option>
                     {{#each categories}}
                         <option value="{{_id}}">{{name}}</option>

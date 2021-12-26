@@ -189,11 +189,26 @@ router.post('/posts/update', (req, res) => {
 
         post.save().then(() => {
             req.flash('success_msg', 'Successfully edited post')
-            res.redirect('/admin/categories')
+            res.redirect('/admin/posts')
         }).catch(err => {
             req.flash('error_msg', 'Error editing post' + err)
-            res.redirect('/admin/catgories')
+            res.redirect('/admin/posts')
         })  
+    })
+})
+
+router.get('/posts/delete/:id', (req, res) => {
+    Post.findById({_id: req.params.id}).populate('category').lean().then(post => {
+        res.render('admin/posts/delete', {post})
+    }).catch(err => {
+        req.flash('error_msg', 'Postagem não encontrada')
+    })
+})
+
+router.post('/posts/delete', (req, res) => {
+    Post.deleteOne({_id: req.body.id}).then(post => {
+        req.flash('success_msg', 'Sucessfully deleted posting')
+        res.redirect('/admin/posts')
     })
 })
 

@@ -1,0 +1,15 @@
+<table class="table table-dark table-hover mt-3">
+    <thead>
+        <tr>
+          <th scope="col">Selecione a categoria</th>
+        </tr>
+    </thead>      
+    <tbody>
+        {{#each categories}}
+            <tr>
+                <td><a href="/categories/{{slug}}">{{name}}</a></td>
+            </tr>
+        {{else}}
+        {{/each}}        
+    </tbody>
+</table> 

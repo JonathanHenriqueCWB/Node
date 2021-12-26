@@ -1,0 +1,12 @@
+{{#each post}}
+        <div class="card text-center mt-4">
+            <h3 class="card-header">{{title}}</h3>
+            <div class="card-body">
+                <h5 class="card-title">{{description}}</h5>
+                <p class="card-text">{{content}}</p>
+            </div>
+            <div class="card-footer text-muted">{{date}}</div>
+            <small>Categoria: {{category.name}}</small>
+        </div>
+    {{else}}
+    {{/each}}

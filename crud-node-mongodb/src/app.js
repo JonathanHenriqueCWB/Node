@@ -6,8 +6,16 @@ import mongoose from 'mongoose'
 import session from 'express-session'
 import flash from 'connect-flash'
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // CONFIGURAÇÕES
 {
+    // ARQUIVOS STATICOS
+    app.use(express.static(path.join(__dirname, 'public')))
+
     // SESSION, FLASH E MIDLEWARE
     app.use(session({
         secret: 'crudmongo',

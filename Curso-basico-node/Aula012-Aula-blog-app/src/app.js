@@ -13,6 +13,9 @@ const __dirname = path.dirname(__filename);
 import session from 'express-session'
 import flash from 'connect-flash'
 
+import Posts from './models/Post.js'
+import Category from './models/Category.js'
+
 // Sessão, flash e middleware => ordem importa!
     app.use(session({
         secret: 'cursodenode',
@@ -48,8 +51,41 @@ import flash from 'connect-flash'
 
 // rotas
     app.get('/', (req, res) => {
-        res.render('home')
+       Posts.find().populate('category').lean().sort({date: 'desc'}).then(posts => {
+           res.render('index', {posts})
+       }).catch(err => {
+           req.flash('error_msg', 'No posts found')
+           res.redirect('/')
+       })
     })
+
+    app.get('/posts/:slug', (req, res) => {
+        Posts.find({slug: req.params.slug}).populate('category').lean().then(post => {
+            if(post.length > 0) {
+                res.render('posts/index', {post})
+            }else {
+                req.flash('error_msg', 'No posts found')
+                res.redirect('/')
+            }
+        }).catch(err => {
+            req.flash('error_msg', 'No posts found')
+            res.redirect('/')
+        })
+    })
+
+    app.get('/categories', (req, res) => {
+        Category.find().lean().then(categories => {
+            res.render('categories/index', {categories})
+        }).catch(err => {
+            req.flash('error_msg', 'Please register a category')
+            res.redirect('/')
+        })
+    })
+
+    app.get('/categories/:slug', (req, res) => {
+        res.send('Rota encontrada ' + req.params.slug)
+    })
+
     app.use('/admin', admin)
 
 app.listen(8080, () => console.log(`Servidor rodando na porta ${8080}`))
