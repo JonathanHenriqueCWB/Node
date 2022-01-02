@@ -1,0 +1,29 @@
+<h1>List of Category</h1>
+
+<a href="/admin/categories/create" class="btn btn-outline-success mt-2"> + NEW CATEGORY</a>
+
+<div class="table-responsive">
+
+<table class="table table-dark table-striped table-hover table-sm mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each categories}}
+    <tr>
+      <td>{{name}}</td>
+      <td>{{slug}}</td>
+      <td>
+        <a href="/admin/categories/update/{{_id}}" class="btn btn-outline-warning ml-1">UPDATE</a>
+        <a href="/admin/categories/delete/{{_id}}" class="btn btn-outline-danger">DELETE</a>
+      </td>
+    </tr>
+    {{else}}
+    {{/each}}
+  </tbody>
+</table>
+</div>

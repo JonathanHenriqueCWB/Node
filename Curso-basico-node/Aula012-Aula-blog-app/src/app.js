@@ -15,6 +15,7 @@ import flash from 'connect-flash'
 
 import Posts from './models/Post.js'
 import Category from './models/Category.js'
+import Post from './models/Post.js'
 
 // Sessão, flash e middleware => ordem importa!
     app.use(session({
@@ -82,8 +83,18 @@ import Category from './models/Category.js'
         })
     })
 
-    app.get('/categories/:slug', (req, res) => {
-        res.send('Rota encontrada ' + req.params.slug)
+    app.get('/categories/:id', (req, res) => {
+        Post.find( {category: req.params.id} ).populate('category').lean().then(posts => {
+            if(posts.length > 0){
+                res.render('categories/posts', {posts})
+            }else{
+                req.flash('error_msg', 'This is category does not contain any post')
+                res.redirect('/')
+            }
+        }).catch(err => {
+            req.flash('error_msg', 'No registered posts, please register')
+            res.redirect('/')
+        })
     })
 
     app.use('/admin', admin)

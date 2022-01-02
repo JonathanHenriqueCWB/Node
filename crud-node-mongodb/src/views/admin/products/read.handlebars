@@ -1,47 +1,32 @@
-<style>
-    table {
-        font-family: arial, sans-serif;
-        border-collapse: collapse;
-        width: 70%;
-    }
+<h1>List of Products</h1>
 
-    td, th {
-        border: 1px solid #dddddd;
-        text-align: left;
-        padding: 8px;
-    },
-    button {
-        margin-right: 10px;
-    }
-</style>
+<a href="/admin/products/create" class="btn btn-outline-success">+ CREATE NEW PRODUCT</a>
 
-<h1>Product list</h1>
-<hr>
-
-<a href='/admin/products/create'><button>CREATE A NEW PRODUCT</button></a><br><br>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Category</th>
-    <th>quantity</th>
-    <th>brand</th>
-    <th>description</th>
-  </tr>
-
-{{#each products}}
-  <tr>
-    <td>{{name}}</td>
-    <td>{{category}}</td>
-    <td>{{quantity}}</td>
-    <td>{{brand}}</td>
-    <td>{{description}}</td>
-    <td>
-        <a href="/admin/products/update/{{_id}}"><button>UPDATE</button></a>
-        <a href="/admin/products/delete/{{_id}}"><button>DELETE</button></a>
-    </td>
-  </tr>
-{{else}}
-{{/each}}
-
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Options</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+        <tr>
+        <td>{{name}}</td>
+        <td>{{quantity}}</td>
+        <td>{{brand}}</td>
+        <td>{{description}}</td>
+        <td>{{category.name}}</td>
+        <td>
+            <a href="/admin/products/update/{{_id}}" class="btn btn-warning">UPDATE</a>
+            <a href="/admin/products/delete/{{_id}}" class="btn btn-danger">DELETE</a>
+        </td>
+        </tr>
+    {{else}}
+    {{/each}}
+  </tbody>
 </table>
