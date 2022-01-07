@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bcrypt</title>
+</head>
+<body style="background-color: rgb(163, 117, 206);">
+
+    <!-- EXIBIR MSG NA SESSÃO POR FLASH -->
+    {{#if success_msg}}
+        <div style="color: white; background-color: rgb(101, 189, 108);">{{success_msg}}</div>
+    {{/if}}
+    {{#if error_msg}}
+        <div style="color: white; background-color: rgb(185, 92, 92);">{{error_msg}}</div>
+    {{/if}}
+
+    <!-- CORPO DA REQUISIÇÃO -->
+    {{{body}}}
+
+</body>
+</html>

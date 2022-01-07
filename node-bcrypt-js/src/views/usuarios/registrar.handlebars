@@ -1,0 +1,56 @@
+<style>
+    * {
+        text-align: center;
+        color: white;
+    }
+    div {
+        padding: 10px;
+    }
+    input {
+        height: 15px; width: 500px;
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid rgb(255, 255, 255);
+        outline: none;
+        color: blueviolet;
+    }
+    button {
+        width: 520px; height: 40px;
+        border-radius: 20px;
+        padding: 10px;
+        border: 1px solid blueviolet;
+        background-color: blueviolet;
+    }
+    h2 {
+        margin-top: 100px;
+    }
+</style>
+
+<h1>node.bcrypt.js</h1>
+<hr>
+
+
+<h2>Formulário de cadastro</h2>
+
+<form action="/usuarios/registrar" method="post">
+    <div>
+        <input type="text" name="nome" placeholder="Nome" >
+    </div>
+    <div>
+        <input type="email" name="email" placeholder="Email" >
+    </div>
+    <div>
+        <input type="password" name="senha" placeholder="Senha" >
+    </div>
+    <div>
+        <input type="password" name="confirmaSenha" placeholder="Comfirma Senha" >
+    </div>
+    <div>
+        <button>CADASTRAR</button>
+    </div>
+</form>
+
+{{#each error}}
+    <div style="color: rgb(255, 255, 255); font-size: 20px; background-color: rgb(201, 107, 107);">{{texto}}</div>
+{{else}}
+{{/each}}
