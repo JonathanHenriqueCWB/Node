@@ -17,6 +17,8 @@ import Posts from './models/Post.js'
 import Category from './models/Category.js'
 import Post from './models/Post.js'
 
+import users from './routes/user-routes.js'
+
 // Sessão, flash e middleware => ordem importa!
     app.use(session({
         secret: 'cursodenode',
@@ -98,5 +100,6 @@ import Post from './models/Post.js'
     })
 
     app.use('/admin', admin)
+    app.use('/users', users)
 
 app.listen(8080, () => console.log(`Servidor rodando na porta ${8080}`))

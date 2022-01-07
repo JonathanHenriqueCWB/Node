@@ -5,13 +5,13 @@
   "main": "index.js",
   "type": "module",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
     "express": "^4.17.1",
     "express-handlebars": "^6.0.1",
     "express-session": "^1.17.2",
     "mongoose": "^6.0.13"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
