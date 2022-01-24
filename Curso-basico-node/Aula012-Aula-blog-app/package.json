@@ -10,7 +10,9 @@
     "express": "^4.17.1",
     "express-handlebars": "^6.0.1",
     "express-session": "^1.17.2",
-    "mongoose": "^6.0.13"
+    "mongoose": "^6.0.13",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

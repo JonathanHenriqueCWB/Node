@@ -1,43 +1,45 @@
-<h1>Create new Product</h1>
+<div class="container">
+    <h1>Create new Product</h1>
 
-<form method="post" action="/admin/products/create" class="mt-4">
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" name="name">
+    <form method="post" action="/admin/products/create" class="mt-4">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="quantity">Quantity</label>
+                <input type="number" class="form-control" name="quantity">
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="quantity">Quantity</label>
-            <input type="number" class="form-control" name="quantity">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="brand">Brand</label>
+                <input type="text" class="form-control" name="brand">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="category">Category</label>
+                <select name="category" class="form-control">
+                    <option value="0" selected>Select Category</option>
+                    {{#each categories}}
+                        <option value="{{_id}}">{{name}}</option>
+                    {{else}}
+                        <option value="0">No registered item</option>
+                    {{/each}}
+                </select>
+            </div>
         </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="brand">Brand</label>
-            <input type="text" class="form-control" name="brand">
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="description">Descripton</label>
+                <textarea class="form-control" name="description" rows="3"></textarea>
+            </div>
         </div>
-        <div class="form-group col-md-6">
-            <label for="category">Category</label>
-            <select name="category" class="form-control">
-                <option value="0" selected>Select Category</option>
-                {{#each categories}}
-                    <option value="{{_id}}">{{name}}</option>
-                {{else}}
-                    <option value="0">No registered item</option>
-                {{/each}}
-            </select>
-        </div>
-    </div>
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            <label for="description">Descripton</label>
-            <textarea class="form-control" name="description" rows="3"></textarea>
-        </div>
-    </div>
-    <button class="btn btn-outline-success">CREATE PRODUCT</button>
-</form>
+        <button class="btn btn-outline-success">CREATE PRODUCT</button>
+    </form>
 
-{{#each error}}
-    <div class="mt-4 alert alert-danger">{{text}}</div>
-{{else}}
-{{/each}}
+    {{#each error}}
+        <div class="mt-4 alert alert-danger">{{text}}</div>
+    {{else}}
+    {{/each}}
+</div>

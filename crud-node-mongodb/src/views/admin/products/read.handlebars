@@ -1,32 +1,34 @@
-<h1>List of Products</h1>
+<div class="container">
+  <h1>List of Products</h1>
 
-<a href="/admin/products/create" class="btn btn-outline-success">+ CREATE NEW PRODUCT</a>
+  <a href="/admin/products/create" class="btn btn-outline-success">+ CREATE NEW PRODUCT</a>
 
-<table class="table mt-4">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Quantity</th>
-      <th scope="col">Brand</th>
-      <th scope="col">Description</th>
-      <th scope="col">Category</th>
-      <th scope="col">Options</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each products}}
-        <tr>
-        <td>{{name}}</td>
-        <td>{{quantity}}</td>
-        <td>{{brand}}</td>
-        <td>{{description}}</td>
-        <td>{{category.name}}</td>
-        <td>
-            <a href="/admin/products/update/{{_id}}" class="btn btn-warning">UPDATE</a>
-            <a href="/admin/products/delete/{{_id}}" class="btn btn-danger">DELETE</a>
-        </td>
-        </tr>
-    {{else}}
-    {{/each}}
-  </tbody>
-</table>
+  <table class="table mt-4">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Brand</th>
+        <th scope="col">Description</th>
+        <th scope="col">Category</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+          <tr>
+          <td>{{name}}</td>
+          <td>{{quantity}}</td>
+          <td>{{brand}}</td>
+          <td>{{description}}</td>
+          <td>{{category.name}}</td>
+          <td>
+              <a href="/admin/products/update/{{_id}}" class="btn btn-warning">UPDATE</a>
+              <a href="/admin/products/delete/{{_id}}" class="btn btn-danger">DELETE</a>
+          </td>
+          </tr>
+      {{else}}
+      {{/each}}
+    </tbody>
+  </table>
+</div>

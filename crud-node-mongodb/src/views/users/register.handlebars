@@ -1,0 +1,68 @@
+<style>
+    .box {
+        height: calc(100vh - 100px);
+        display: flex;
+              justify-content: center;
+        align-items: center;
+        border-radius: 20px;
+    }
+    .box-item-1 {
+        width: 600px; height: 500px;
+        color: white;
+        padding: 40px 20px;
+        background-image: linear-gradient(to right, rgba(212, 0, 255, 0.788) , rgba(83, 35, 173, 0.877));
+    }
+    .box-item-2 {
+        width: 600px; height: 500px;
+        color: white;
+        padding: 40px 20px;
+        background-image: linear-gradient(to left, rgba(212, 0, 255, 0.788) , rgba(83, 35, 173, 0.877));
+    }
+    .btn-style {
+        color: white;
+        background-color: purple;
+        border-radius: 20px;
+        padding: 10px 20px;
+        border: 1px solid purple;
+        outline: none;
+    }
+    .btn-style:hover {
+        color: white;
+        background-color: rgb(100, 0, 100);
+        border: 1px solid rgb(100, 0, 100);
+        outline: none;
+    }
+</style>
+
+<div class="box container">
+    <div class="box-item-1">
+        <form action="/user/register" method="post">
+            <div class="form-goup">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirPassword">Confirm Password</label>
+                <input type="password" class="form-control" name="confirmPassword">
+            </div>
+            <div class="form-group">
+                <button class="btn-style btn-block">CREATE NEW USER</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="box-item-2">
+        {{#each error}}
+            <div class="alert alert-danger mt-4">{{text}}</div>
+        {{else}}
+        {{/each}}
+    </div>
+</div>

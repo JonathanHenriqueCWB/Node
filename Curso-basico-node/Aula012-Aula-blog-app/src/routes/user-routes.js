@@ -3,8 +3,8 @@ import User from '../models/User.js'
 const router = Router()
 
 import Users from '../models/User.js'
-
 import bcrypt from 'bcryptjs'
+import passport from 'passport'
 
 router.get('/register', (req, res) => {
     res.render('users/register')
@@ -41,7 +41,6 @@ router.post('/register', (req, res) => {
         error.push({text: 'The password must match'})
     }
 
-    // CONTINUAR ...
     if( error.length > 0 ) {
         res.render('users/register', {error})
     }else {
@@ -83,25 +82,24 @@ router.post('/register', (req, res) => {
     }
 })
 
-export default router
+router.get('/login', (req, res) => {
+    res.render('users/login')
+})
 
-/**
- * User.findOne({email: req.body.email}).then(user => {
-            if(user){
-                req.flash('error_msg', 'There is already a user with this email.')
-                res.redirect('/user/register')
-            }else {
-                bcrypt.genSalt(10, (error, salt) => {
-                    bcrypt.hash(newUser.password, salt, (error, hash) => {
-                        if(error){
-                            req.flash('error_msg', 'Error generating password hash (encryption)')
-                        }
-                        newUser.password = hash
-                    })
-                })
-            }            
-        }).catch(err => {
-            req.flash('error_msg', 'Internal error')
-            res.redirect('/')
-        })
- */
+// Rota de authenticação
+router.post('/login', (req, res, next) => {
+    /*
+    const novoUsuario ={ 
+        email: req.body.email,
+        password: req.body.password
+    }
+    res.send(novoUsuario)
+    */
+    passport.authenticate("local", {
+        successRedirect: '/',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })(req, res, next)
+})
+
+export default router

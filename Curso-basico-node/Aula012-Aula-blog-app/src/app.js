@@ -2,7 +2,10 @@ import express from 'express'
 const app = express()
 
 import admin from './routes/admin-routes.js'
+import users from './routes/user-routes.js'
+
 import { engine } from 'express-handlebars'
+
 import mongoose from 'mongoose'
 
 import path from 'path';
@@ -17,19 +20,27 @@ import Posts from './models/Post.js'
 import Category from './models/Category.js'
 import Post from './models/Post.js'
 
-import users from './routes/user-routes.js'
+// const passport = require('passport')
+// require('./config/auth')(passport)
+import passport from 'passport'
+import passportConfig from './config/auth.js'
+passportConfig(passport);
 
-// Sessão, flash e middleware => ordem importa!
+// Sessão, passport, flash e middleware => ordem importa!
     app.use(session({
         secret: 'cursodenode',
         resave: true,
         saveUninitialized: true
     }))
+
+    app.use(passport.initialize())
+    app.use(passport.session())
     app.use(flash())
 
     app.use((req, res, next) => {
         res.locals.success_msg = req.flash("success_msg")
         res.locals.error_msg = req.flash("error_msg")
+        res.locals.error = req.flash('error')
         next()
     })
 

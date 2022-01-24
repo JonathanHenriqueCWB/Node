@@ -1,6 +1,7 @@
 import express from 'express'
 const app = express()
 import admin from './routes/admin-route.js'
+import user from './routes/user-route.js'
 import { engine } from 'express-handlebars';
 import mongoose from 'mongoose'
 import session from 'express-session'
@@ -51,10 +52,12 @@ app.set('views', './views');
 app.get('/', (req, res) => {
     Products.find().lean().then(products => {
         Category.find().lean().then(categories => {
-            res.render('index', {products, categories})
+            res.render('home', {products, categories})
         }).catch()
-    }).catch()
-    
+    }).catch(err => {
+        req.flash('error_msg', 'Error loading products')
+        res.redirect('/')
+    })    
 })
 
 app.get('/categories/:id', (req, res) => {
@@ -64,6 +67,8 @@ app.get('/categories/:id', (req, res) => {
 })
 
 app.use('/admin', admin)
+app.use('/user', user)
+
 
 const PORT = 8080
 app.listen(PORT, () => console.log(`Server is running on port ${PORT}`))
