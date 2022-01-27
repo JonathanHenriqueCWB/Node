@@ -11,9 +11,10 @@
 </head>
 <body>
 
+    {{>_navbar}}
+    
     <!-- ERROS DAS VARIAVEIS GLOBAIS -->
     <div>
-        {{>_navbar}}
         {{#if error}}
             <div class="alert alert-danger">{{error}}</div>
         {{else}}

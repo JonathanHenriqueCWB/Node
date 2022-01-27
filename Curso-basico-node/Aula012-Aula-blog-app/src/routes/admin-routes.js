@@ -3,7 +3,10 @@ const router = Router()
 import Category from '../models/Category.js' 
 import Post from '../models/Post.js'
 
-router.get('/', (req, res) => res.render('admin/index'))
+import admin from '../helpers/eAdmin.js'
+const isAdmin = admin.eAdmin
+
+router.get('/', isAdmin, (req, res) => res.render('admin/index'))
 
 router.get('/categories', (req, res) => {
     Category.find().lean().sort({date: 'desc'}).then(categories => {

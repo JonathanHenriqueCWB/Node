@@ -13,12 +13,23 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="/categories">Categoreis</a>
-      </li>      
-      <li class="nav-item">
-        <a class="nav-link" href="/users/login">Login</a>
       </li>
+
+      {{#if user}}
       <li class="nav-item">
-        <a class="nav-link" href="/users/register">Register</a>
+          <a class="nav-link" href="#">Sair</a>
+        </li>
+      {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/users/login">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/users/register">Register</a>
+        </li>
+      {{/if}}
+
+
+    </div>
       </li>
     </ul>
   </div>

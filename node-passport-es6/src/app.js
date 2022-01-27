@@ -2,9 +2,11 @@ import express, { urlencoded } from 'express'
 const app = express()
 import { engine } from 'express-handlebars'
 import user from './routes/user-routes.js'
+import admin from './routes/admin-routes.js'
 import mongoose from 'mongoose'
 import flash from 'connect-flash'
 import session from 'express-session'
+
 // Cofigurações do passport
 import passport from 'passport'
 import passportConfig from './config/auth.js'
@@ -24,6 +26,7 @@ app.use((req, res, next) => {
     res.locals.success_msg = req.flash("success_msg")
     res.locals.error_msg = req.flash("error_msg")
     res.locals.error = req.flash('error')
+    res.locals.user = req.user || null
     next()
 })
 
@@ -45,6 +48,7 @@ app.set('views', './views');
 
 // Routes
 app.use('/users', user)
+app.use('/admin', admin)
 app.get('/', (req, res) => { res.render('home') })
 
 const PORT = 8080

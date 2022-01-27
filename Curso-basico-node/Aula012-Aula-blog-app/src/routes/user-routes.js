@@ -2,7 +2,6 @@ import { Router } from 'express'
 import User from '../models/User.js'
 const router = Router()
 
-import Users from '../models/User.js'
 import bcrypt from 'bcryptjs'
 import passport from 'passport'
 
@@ -88,13 +87,6 @@ router.get('/login', (req, res) => {
 
 // Rota de authenticação
 router.post('/login', (req, res, next) => {
-    /*
-    const novoUsuario ={ 
-        email: req.body.email,
-        password: req.body.password
-    }
-    res.send(novoUsuario)
-    */
     passport.authenticate("local", {
         successRedirect: '/',
         failureRedirect: '/users/login',
